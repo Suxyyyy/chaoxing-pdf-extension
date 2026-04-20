@@ -3,8 +3,8 @@
 一个给学习通用的小工具。
 
 很多用 pad 上课的同学，平时都要下载老师的课件。  
-但有的老师不会把课件放在 **课程资料** 里，而是放在 **章节任务** 里面。  
-这样想下载的时候就很麻烦，点来点去，也不一定好找。
+但有的老师没有把课件放在 **课程资料** 里，而放在了 **章节任务** 里面。  
+这样想下载的时候就很麻烦。
 
 所以我做了这个工具。
 
@@ -21,21 +21,6 @@
 - 成功后自动复制链接到剪贴板
 - 同时显示链接，方便手动打开
 - 支持 Chrome / Edge（Chromium 内核浏览器）
-
----
-
-## 📸 Screenshots
-
-
-
-## ![扩展管理页](assets/extensions-page.png)
-
-![选中文件夹](assets/select-folder.png)
-
-![学习通课件页](assets/courseware-page.png)
-![提取成功](assets/success-panel.png)
-
-![下载界面](assets/newTab-DW.png)
 
 ---
 
@@ -81,6 +66,20 @@ edge://extensions/
 6. 等待提取结果
 7. 成功后会自动复制 PDF 地址
 8. 你可以点击地址链接或粘贴到浏览器打开，进行下载
+
+---
+
+## 📸 Screenshots
+
+
+## ![扩展管理页](assets/extensions-page.png)
+
+![选中文件夹](assets/select-folder.png)
+
+![学习通课件页](assets/courseware-page.png)
+![提取成功](assets/success-panel.png)
+
+![下载界面](assets/newTab-DW.png)
 
 ---
 
