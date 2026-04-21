@@ -8,12 +8,15 @@
   const MESSAGE_TYPE = 'cx-pdf-extractor-candidate';
   const REQUEST_TYPE = 'cx-pdf-extractor-request';
   const POSITION_STORAGE_KEY = 'cx-pdf-extractor-position';
+  const HOTKEY_STORAGE_KEY = 'cx-pdf-extractor-hotkey';
   const DRAG_THRESHOLD = 6;
+  const DEFAULT_HOTKEY = { key: 'p', ctrl: true, alt: false, shift: false };
 
   let busy = false;
   const sharedCandidates = new Map();
   let dragState = null;
   let suppressNextClick = false;
+  let currentHotkey = { ...DEFAULT_HOTKEY };
 
   function collectLocalCandidateTexts() {
     const candidates = [];
@@ -489,6 +492,7 @@
   function boot() {
     if (document.body || document.documentElement) {
       createUi();
+      loadHotkeyAndAttach();
       return;
     }
 
@@ -496,9 +500,46 @@
       if (document.body || document.documentElement) {
         observer.disconnect();
         createUi();
+        loadHotkeyAndAttach();
       }
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  function loadHotkeyAndAttach() {
+    if (typeof chrome !== 'undefined' && chrome.storage) {
+      chrome.storage.sync.get([HOTKEY_STORAGE_KEY], result => {
+        if (result[HOTKEY_STORAGE_KEY]) {
+          currentHotkey = result[HOTKEY_STORAGE_KEY];
+        }
+        attachHotkeyListener();
+      });
+    } else {
+      attachHotkeyListener();
+    }
+  }
+
+  function attachHotkeyListener() {
+    document.addEventListener('keydown', event => {
+      if (event.repeat) return;
+
+      const target = event.target;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+        return;
+      }
+
+      const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+
+      if (
+        key === currentHotkey.key &&
+        event.ctrlKey === currentHotkey.ctrl &&
+        event.altKey === currentHotkey.alt &&
+        event.shiftKey === currentHotkey.shift
+      ) {
+        event.preventDefault();
+        handleExtractClick();
+      }
+    });
   }
 
   boot();

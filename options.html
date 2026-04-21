@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>快捷键设置 - Chaoxing PDF Extractor</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>快捷键设置</h1>
+
+    <div class="setting-group">
+      <label for="hotkey-input">抓取 PDF 快捷键：</label>
+      <input
+        type="text"
+        id="hotkey-input"
+        placeholder="按下快捷键..."
+        readonly
+      >
+      <div class="hint">
+        支持单键（如 P）或组合键（如 Ctrl+P、Alt+Shift+P）
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button id="save-btn" class="primary">保存</button>
+      <button id="reset-btn">重置为默认</button>
+    </div>
+
+    <div id="status" class="status" hidden></div>
+
+    <div class="examples">
+      <h3>示例：</h3>
+      <ul>
+        <li>单键：P、D、F 等</li>
+        <li>Ctrl 组合：Ctrl+P、Ctrl+D</li>
+        <li>Alt 组合：Alt+P、Alt+D</li>
+        <li>多键组合：Ctrl+Shift+P、Alt+Shift+D</li>
+      </ul>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -20,6 +20,7 @@
 - 点击后尝试获取当前课件对应的 PDF 地址
 - 成功后自动复制链接到剪贴板
 - 同时显示链接，方便手动打开
+- **支持自定义快捷键**（单键或组合键）快速触发抓取
 - 支持 Chrome / Edge（Chromium 内核浏览器）
 
 ---
@@ -58,6 +59,8 @@ edge://extensions/
 
 ## 🧭 How to Use
 
+### 方式一：点击按钮
+
 1. 先登录学习通
 2. 打开自己的课程
 3. 进入具体章节
@@ -66,6 +69,37 @@ edge://extensions/
 6. 等待提取结果
 7. 成功后会自动复制 PDF 地址
 8. 你可以点击地址链接或粘贴到浏览器打开，进行下载
+
+### 方式二：使用快捷键
+
+1. 右键点击扩展图标，选择 **选项** 进入设置页面
+2. 在快捷键设置中，点击输入框
+3. 按下你想要的快捷键（如 `Ctrl+P`、`Alt+D` 等）
+4. 点击 **保存** 按钮
+5. 在课件页面按下设置的快捷键即可快速抓取 PDF
+
+**默认快捷键：** `Ctrl+P`
+
+**支持的快捷键类型：**
+- 单键：P、D、F 等
+- Ctrl 组合：Ctrl+P、Ctrl+D
+- Alt 组合：Alt+P、Alt+D
+- 多键组合：Ctrl+Shift+P、Alt+Shift+D
+
+---
+
+## 📸 Screenshots
+
+
+
+## ![扩展管理页](assets/extensions-page.png)
+
+![选中文件夹](assets/select-folder.png)
+
+![学习通课件页](assets/courseware-page.png)
+![提取成功](assets/success-panel.png)
+
+![下载界面](assets/newTab-DW.png)
 
 ---
 
@@ -169,6 +203,9 @@ chaoxing-pdf-extension/
 ├─ icons/
 ├─ content.css
 ├─ content.js
+├─ options.html
+├─ options.css
+├─ options.js
 └─ manifest.json
 ```
 
