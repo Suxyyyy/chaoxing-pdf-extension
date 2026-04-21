@@ -1,4 +1,4 @@
-const DEFAULT_HOTKEY = { key: 'p', ctrl: true, alt: false, shift: false };
+const DEFAULT_HOTKEY = { key: 'p', ctrl: false, alt: true, shift: false };
 const STORAGE_KEY = 'cx-pdf-extractor-hotkey';
 
 const hotkeyInput = document.getElementById('hotkey-input');

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Chaoxing PDF Link Extractor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "在学习通课件页一键提取课件的 PDF 文件链接。",
   "icons": {
     "16": "icons/icon-16.png",
@@ -13,8 +13,7 @@
     "storage"
   ],
   "host_permissions": [
-    "https://mooc1.chaoxing.com/*",
-    "https://s3.ananas.chaoxing.com/*"
+    "https://mooc1.chaoxing.com/*"
   ],
   "options_page": "options.html",
   "content_scripts": [

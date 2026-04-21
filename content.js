@@ -10,7 +10,7 @@
   const POSITION_STORAGE_KEY = 'cx-pdf-extractor-position';
   const HOTKEY_STORAGE_KEY = 'cx-pdf-extractor-hotkey';
   const DRAG_THRESHOLD = 6;
-  const DEFAULT_HOTKEY = { key: 'p', ctrl: true, alt: false, shift: false };
+  const DEFAULT_HOTKEY = { key: 'p', ctrl: false, alt: true, shift: false };
 
   let busy = false;
   const sharedCandidates = new Map();
@@ -426,18 +426,31 @@
 
   async function fetchStatus(objectId) {
     const url = `https://mooc1.chaoxing.com/ananas/status/${objectId}?flag=normal&_dc=${Date.now()}`;
-    const response = await fetch(url, {
-      credentials: 'include',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 10000);
+
+    try {
+      const response = await fetch(url, {
+        credentials: 'include',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        signal: controller.signal
+      });
+
+      if (!response.ok) {
+        throw new Error(`状态请求失败：${response.status}`);
       }
-    });
 
-    if (!response.ok) {
-      throw new Error(`状态请求失败：${response.status}`);
+      return await response.json();
+    } catch (error) {
+      if (error && error.name === 'AbortError') {
+        throw new Error('请求超时（10 秒），请检查网络后重试。');
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeoutId);
     }
-
-    return response.json();
   }
 
   async function copyToClipboard(text) {
@@ -514,6 +527,16 @@
         }
         attachHotkeyListener();
       });
+
+      if (chrome.storage.onChanged) {
+        chrome.storage.onChanged.addListener((changes, area) => {
+          if (area !== 'sync') return;
+          const change = changes[HOTKEY_STORAGE_KEY];
+          if (change && change.newValue) {
+            currentHotkey = change.newValue;
+          }
+        });
+      }
     } else {
       attachHotkeyListener();
     }
